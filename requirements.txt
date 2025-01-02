@@ -1,2 +1,2 @@
 streamlit==1.41.1
-git+https://github.com/path/to/llama_cpp.git
+llama-cpp-python
