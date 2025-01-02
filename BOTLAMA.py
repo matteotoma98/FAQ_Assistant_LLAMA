@@ -2,6 +2,30 @@ import streamlit as st
 from llama_cpp import Llama
 import json
 from pathlib import Path
+import os
+import requests
+
+def download_model(model_url, model_path):
+    """Scarica il modello se non è presente nella cartella"""
+    if not os.path.exists(model_path):
+        st.info(f"🚀 Scaricando il modello da {model_url}...")
+        response = requests.get(model_url, stream=True)
+        if response.status_code == 200:
+            with open(model_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            st.success(f"✅ Modello scaricato con successo: {model_path}")
+        else:
+            st.error(f"❌ Errore nel download del modello. Codice di stato: {response.status_code}")
+            raise Exception("Errore nel download del modello")
+    else:
+        st.success(f"✅ Modello già presente in: {model_path}")
+
+# Esegui il controllo e il download all'avvio dell'app
+model_url = "https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q8_0.gguf?download=true"  # URL del modello
+model_path = "models/llama-2-7b-chat.gguf"
+
+download_model(model_url, model_path)
 
 # Configurazione ottimizzata per la velocità
 @st.cache_resource
