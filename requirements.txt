@@ -1,2 +1,2 @@
 streamlit==1.41.1
-llama_cpp
+git+https://github.com/path/to/llama_cpp.git
