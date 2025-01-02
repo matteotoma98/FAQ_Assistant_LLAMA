@@ -1,0 +1,37 @@
+{
+    "SmartWatch X1": {
+        "Quali sono le caratteristiche principali?": "Lo SmartWatch X1 ha un display AMOLED da 1.4\", monitoraggio cardiaco 24/7, GPS integrato, resistenza all'acqua IP68 e batteria che dura fino a 7 giorni.",
+        "È compatibile con iPhone?": "Sì, lo SmartWatch X1 è compatibile sia con iOS (iPhone 8 e successivi) che con Android (6.0 e successivi).",
+        "Come si carica?": "Si carica tramite base magnetica inclusa nella confezione. Il tempo di ricarica completo è di circa 2 ore.",
+        "Può rispondere alle chiamate?": "Sì, ha un microfono e speaker integrati per gestire chiamate direttamente dal polso.",
+        "È impermeabile?": "È resistente all'acqua con certificazione IP68, può essere usato per nuoto in piscina ma non per immersioni profonde."
+    },
+    "RoboVac Clean-2000": {
+        "Quanto dura la batteria?": "La batteria del RoboVac Clean-2000 dura fino a 120 minuti di pulizia continua. Torna automaticamente alla base quando la batteria è sotto il 15%.",
+        "Può pulire i tappeti?": "Sì, ha una modalità boost automatica per tappeti che aumenta la potenza di aspirazione quando ne rileva uno.",
+        "Come gestisce gli ostacoli?": "Utilizza sensori infrarossi e paraurti sensibili per evitare mobili e ostacoli. Può anche rilevare le scale per evitare cadute.",
+        "Quanto è alto?": "L'altezza è di 8.5 cm, permettendogli di passare sotto la maggior parte dei mobili.",
+        "Si può controllare da smartphone?": "Sì, tramite app dedicata puoi programmare pulizie, creare zone vietate e monitorare il percorso di pulizia."
+    },
+    "CoffeeMax Pro": {
+        "Che tipo di caffè può utilizzare?": "Accetta sia caffè in grani che macinato. Ha un macinacaffè integrato con 15 livelli di macinatura.",
+        "Qual è la capacità del serbatoio?": "Il serbatoio dell'acqua ha una capacità di 1.8 litri. Il contenitore dei grani può contenere 250g di caffè.",
+        "Fa anche il cappuccino?": "Sì, ha un sistema automatico per montare il latte con vaporiera orientabile e programmi preimpostati per cappuccino e latte macchiato.",
+        "Come si pulisce?": "Ha un programma di pulizia automatica. Si consiglia la decalcificazione ogni 3-4 mesi a seconda dell'uso.",
+        "Quanto tempo impiega per riscaldarsi?": "Il sistema si riscalda in 25 secondi grazie alla tecnologia ThermoBlock."
+    },
+    "AudioPro Headphones": {
+        "Quanto dura la batteria?": "Fino a 30 ore di riproduzione con cancellazione del rumore attiva, 40 ore senza.",
+        "La cancellazione del rumore è regolabile?": "Sì, offre 3 livelli di cancellazione del rumore più una modalità trasparenza per sentire l'ambiente circostante.",
+        "Sono comode per lungo tempo?": "I padiglioni sono in memory foam rivestito in pelle proteica, progettati per comfort prolungato. Peso totale 250g.",
+        "Supportano il multipoint?": "Sì, possono connettersi simultaneamente a due dispositivi e passare automaticamente tra loro.",
+        "Come è la qualità delle chiamate?": "Utilizzano 4 microfoni con riduzione del rumore AI per chiamate cristalline anche in ambienti rumorosi."
+    },
+    "FitTracker Band": {
+        "È impermeabile?": "Sì, certificazione 5ATM permette nuoto fino a 50m di profondità.",
+        "Che sensori ha?": "Include sensore di frequenza cardiaca, SpO2 per ossigenazione del sangue, accelerometro per passi e sonno, GPS per tracciamento percorsi.",
+        "Quanto dura la batteria?": "14 giorni di uso normale, 7 giorni con GPS attivo frequentemente.",
+        "Traccia il sonno?": "Sì, monitora fasi del sonno (leggero, profondo, REM), qualità della respirazione e fornisce un punteggio del riposo.",
+        "Si può personalizzare il display?": "Offre oltre 100 quadranti scaricabili e la possibilità di usare foto personali come sfondo."
+    }
+}
