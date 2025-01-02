@@ -5,38 +5,51 @@ from pathlib import Path
 import os
 import requests
 
-def download_model(model_url, model_path):
+def download_model(model_url, model_folder):
     """Scarica il modello se non è presente nella cartella"""
-    if not os.path.exists(model_path):
-        st.info(f"🚀 Scaricando il modello da {model_url}...")
-        response = requests.get(model_url, stream=True)
-        if response.status_code == 200:
-            with open(model_path, 'wb') as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
-            st.success(f"✅ Modello scaricato con successo: {model_path}")
+    # Estrai il nome del modello dall'URL o dal Content-Disposition
+    response = requests.head(model_url, allow_redirects=True)
+    if response.status_code == 200:
+        filename = model_url.split('/')[-1].split('?')[0]  # Usa il nome del file dall'URL
+        model_path = os.path.join(model_folder, filename)
+        
+        # Se il modello non è già presente, procedi con il download
+        if not os.path.exists(model_path):
+            st.info(f"🚀 Scaricando il modello da {model_url}...")
+            response = requests.get(model_url, stream=True)
+            if response.status_code == 200:
+                with open(model_path, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                st.success(f"✅ Modello scaricato con successo: {model_path}")
+            else:
+                st.error(f"❌ Errore nel download del modello. Codice di stato: {response.status_code}")
+                raise Exception("Errore nel download del modello")
         else:
-            st.error(f"❌ Errore nel download del modello. Codice di stato: {response.status_code}")
-            raise Exception("Errore nel download del modello")
+            st.success(f"✅ Modello già presente in: {model_path}")
     else:
-        st.success(f"✅ Modello già presente in: {model_path}")
+        st.error(f"❌ Errore nel verificare il file: Codice di stato {response.status_code}")
+        raise Exception("Impossibile verificare il file del modello")
+    
+    return model_path
 
 # Esegui il controllo e il download all'avvio dell'app
 model_url = "https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/resolve/main/llama-2-7b-chat.Q8_0.gguf?download=true"  # URL del modello
-model_path = "models/llama-2-7b-chat.gguf"
+model_folder = "models"
+os.makedirs(model_folder, exist_ok=True)
 
-download_model(model_url, model_path)
+model_path = download_model(model_url, model_folder)
 
 # Configurazione ottimizzata per la velocità
 @st.cache_resource
-def initialize_model():
+def initialize_model(model_path):
     """Inizializza il modello con configurazioni ottimizzate"""
     return Llama(
-        model_path="models/llama-2-7b-chat.gguf",  # Versione più leggera
-        n_ctx=512,          # Context window ridotta
-        n_threads=6,        # Più threads
-        n_batch=512,        # Batch size aumentato
-        n_gpu_layers=32     # Usa GPU se disponibile
+        model_path=model_path,  # Usa il percorso dinamico del modello scaricato
+        n_ctx=512,              # Context window ridotta
+        n_threads=6,            # Più threads
+        n_batch=512,            # Batch size aumentato
+        n_gpu_layers=32         # Usa GPU se disponibile
     )
 
 @st.cache_data
@@ -55,7 +68,6 @@ def generate_compact_prompt(product_faqs, product_name, user_question):
     if not relevant_faqs:
         relevant_faqs = product_faqs[product_name]
     
-    # Verifica che la stringa multi-linea sia correttamente chiusa
     return f"""Product: {product_name}
 FAQ: {json.dumps(relevant_faqs, ensure_ascii=False)}
 Q: {user_question}
@@ -64,14 +76,14 @@ A: Rispondi in italiano:"""  # Aggiunta la specifica per la risposta in italiano
 def main():
     st.title("🤖 FAQ Assistant con LLAMA 🦙")
     
-    # Inizializza il modello (cached)
+    # Inizializza il modello (cache)
     try:
-        llm = initialize_model()
+        llm = initialize_model(model_path)
     except Exception as e:
         st.error(f"Errore inizializzazione modello: {str(e)}")
         return
     
-    # Carica FAQ (cached)
+    # Carica FAQ (cache)
     product_faqs = load_product_faq()
     
     # Selezione prodotto con layout ottimizzato
